@@ -1,4 +1,4 @@
-﻿#include "DiscordUpdater.h"
+﻿#include "DiscordPlugin.h"
 #include "Engine/Core/Log.h"
 #include "Engine/Scripting/Events.h"
 #include "Engine/Scripting/Scripting.h"
@@ -12,25 +12,24 @@
 #include "Engine/Content/Content.h"
 #include "Engine/Content/JsonAsset.h"
 #include "DiscordSettings.h"
+#include <chrono>
 
 IMPLEMENT_GAME_SETTINGS_GETTER(DiscordSettings, "Discord Settings");
 
-DiscordUpdater::DiscordUpdater(const SpawnParams& params)
+DiscordPlugin::DiscordPlugin(const SpawnParams& params)
     : GamePlugin(params)
 {
-    pluginDescription.Name = "Discord";
-    pluginDescription.Author = "Swiggies";
-    pluginDescription.Category = "Utility";
-    pluginDescription.Version = Version(0, 1);
-
-    _description = pluginDescription;
+    _description.Name = "Discord";
+    _description.Author = "Swiggies";
+    _description.Category = "Utility";
+    _description.Version = Version(0, 1);
 }
 
 discord::Core* core{};
 discord::Activity activity{};
 discord::Result result{};
 
-void DiscordUpdater::Initialize()
+void DiscordPlugin::Initialize()
 {
     GamePlugin::Initialize();
 
@@ -39,8 +38,6 @@ void DiscordUpdater::Initialize()
     if (!settings->RichPresenceEnabled) return;
 
     result = discord::Core::Create(settings->ClientID, DiscordCreateFlags_Default, &core);
-
-    UpdateActivity(ActivityState, ActivityDetails);
 
     Guid sceneGuid;
     if (!Guid::Parse(TEXT("9a0387574ab2ad0ab6ec1dba4f9f953f"), sceneGuid)) {
@@ -51,7 +48,7 @@ void DiscordUpdater::Initialize()
     }
 }
 
-void DiscordUpdater::Deinitialize()
+void DiscordPlugin::Deinitialize()
 {
     GamePlugin::Deinitialize();
     core->ActivityManager().ClearActivity([](discord::Result result) {
@@ -61,18 +58,35 @@ void DiscordUpdater::Deinitialize()
     core->~Core();
 }
 
-void DiscordUpdater::Update()
+void DiscordPlugin::Update()
 {
     // Here you can add code that needs to be called every frame
     ::core->RunCallbacks();
 }
 
-API_FUNCTION() void DiscordUpdater::UpdateActivity(String state, String details) {
+API_FUNCTION() void DiscordPlugin::UpdateActivity(int64 startTime, int64 endTime)
+{
+    activity.SetState(ActivityState.ToStringAnsi().GetText());
+    activity.SetDetails(ActivityDetails.ToStringAnsi().GetText());
 
-    activity.SetState(state.ToStringAnsi().GetText());
-    activity.SetDetails(details.ToStringAnsi().GetText());
+    activity.GetAssets().SetLargeImage(ActivityLargeImage.ToStringAnsi().GetText());
+    activity.GetAssets().SetLargeText(ActivityLargeText.ToStringAnsi().GetText());
+    activity.GetAssets().SetSmallImage(ActivitySmallImage.ToStringAnsi().GetText());
+    activity.GetAssets().SetSmallText(ActivitySmallText.ToStringAnsi().GetText());
+
+    if (startTime != 0) {
+        activity.GetTimestamps().SetStart(discord::Timestamp(startTime));
+        if (endTime != 0)
+            activity.GetTimestamps().SetEnd(discord::Timestamp(endTime));
+    }
 
     core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {
         LOG(Info, "Discord Update Activity: {0}", (int)result);
-    });
+        });
 }
+
+API_FIELD()long DiscordPlugin::GetCurrentTime()
+{
+    return (long)std::time(0);   
+}
+

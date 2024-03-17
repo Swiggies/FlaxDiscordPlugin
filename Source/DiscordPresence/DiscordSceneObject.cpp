@@ -1,5 +1,5 @@
 ﻿#include "DiscordSceneObject.h"
-#include "DiscordUpdater.h"
+#include "DiscordPlugin.h"
 #include "Engine/Scripting/Plugins/PluginManager.h"
 
 DiscordSceneObject::DiscordSceneObject(const SpawnParams& params)
@@ -9,16 +9,16 @@ DiscordSceneObject::DiscordSceneObject(const SpawnParams& params)
     _tickUpdate = true;
 }
 
-DiscordUpdater* updater;
+DiscordPlugin* plugin;
 
 void DiscordSceneObject::OnEnable()
 {
     // Here you can add code that needs to be called when script is enabled (eg. register for events)
-    updater = PluginManager::GetPlugin<DiscordUpdater>();
+    plugin = PluginManager::GetPlugin<DiscordPlugin>();
 }
 
 void DiscordSceneObject::OnUpdate()
 {
     // Here you can add code that needs to be called every frame
-    updater->Update();
+    plugin->Update();
 }

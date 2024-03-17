@@ -3,6 +3,9 @@
 #include "Engine/Scripting/ScriptingObject.h"
 #include "Engine/Core/Config/Settings.h"
 
+/// <summary>
+/// The settings class for the plugin.
+/// </summary>
 API_CLASS() class DISCORDPRESENCE_API DiscordSettings : public SettingsBase
 {
 	API_AUTO_SERIALIZATION();
@@ -11,9 +14,15 @@ API_CLASS() class DISCORDPRESENCE_API DiscordSettings : public SettingsBase
 
 public:
 
+	/// <summary>
+	/// The Client ID from the Discord Developer Portal.
+	/// </summary>
 	API_FIELD(Attributes="EditorOrder(0)")
 	int64 ClientID = 0;
 
+	/// <summary>
+	/// Whether rich presence should even be used. (Turn off for privacy)
+	/// </summary>
 	API_FIELD()
 	bool RichPresenceEnabled = true;
 };

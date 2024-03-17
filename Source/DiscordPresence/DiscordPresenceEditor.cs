@@ -28,7 +28,7 @@ public class DiscordPresenceEditor : EditorPlugin
     /// <summary>
     /// Set plugin type
     /// </summary>
-    public override Type GamePluginType => typeof(DiscordUpdater);
+    public override Type GamePluginType => typeof(DiscordPlugin);
 
     /// <summary>
     /// Init
