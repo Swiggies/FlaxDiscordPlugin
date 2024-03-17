@@ -1,0 +1,18 @@
+﻿{
+  "profiles": {
+    "DiscordPresence": {
+      "commandName": "Executable",
+      "workingDirectory": "D:/Projects/Flax/PluginTesting",
+      "executablePath": "C:/Program Files (x86)/Flax/Flax_master/Binaries/Editor/Win64/Development/FlaxEditor.exe",
+      "commandLineArgs": "-project \"D:/Projects/Flax/PluginTesting\"",
+      "nativeDebugging": false
+    },
+    "DiscordPresenceEditor": {
+      "commandName": "Executable",
+      "workingDirectory": "D:/Projects/Flax/PluginTesting",
+      "executablePath": "C:/Program Files (x86)/Flax/Flax_master/Binaries/Editor/Win64/Development/FlaxEditor.exe",
+      "commandLineArgs": "-project \"D:/Projects/Flax/PluginTesting\"",
+      "nativeDebugging": false
+    }
+  }
+}

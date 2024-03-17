@@ -1,0 +1,32 @@
+{
+	"ID": "9a0387574ab2ad0ab6ec1dba4f9f953f",
+	"TypeName": "FlaxEngine.SceneAsset",
+	"EngineBuild": 6408,
+	"Data": [
+		{
+			"ID": "9a0387574ab2ad0ab6ec1dba4f9f953f",
+			"TypeName": "FlaxEngine.Scene",
+			"LightmapSettings": {
+				"IndirectLightingIntensity": 1.0,
+				"GlobalObjectsScale": 1.0,
+				"ChartsPadding": 3,
+				"AtlasSize": 1024,
+				"BounceCount": 1,
+				"CompressLightmaps": true,
+				"UseGeometryWithNoMaterials": true,
+				"Quality": 10
+			}
+		},
+		{
+			"ID": "b25c0520409c0507b8979d882e69635e",
+			"TypeName": "FlaxEngine.EmptyActor",
+			"ParentID": "9a0387574ab2ad0ab6ec1dba4f9f953f",
+			"Name": "DiscordUpdater"
+		},
+		{
+			"ID": "75ace69c475f47592c390b8458bfdd8d",
+			"TypeName": "DiscordPresence.DiscordSceneObject",
+			"ParentID": "b25c0520409c0507b8979d882e69635e"
+		}
+	]
+}
