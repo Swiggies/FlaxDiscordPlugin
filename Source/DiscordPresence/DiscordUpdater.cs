@@ -4,9 +4,8 @@ using System;
 using FlaxEditor;
 using FlaxEditor.Content;
 using FlaxEngine;
-using DiscordPresence;
 
-namespace DiscordPresenceEditor;
+namespace DiscordPresence;
 
 /// <summary>
 /// DiscordPresence Script.

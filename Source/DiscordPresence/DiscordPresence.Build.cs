@@ -18,7 +18,8 @@ public class DiscordPresence : GameModule
         // To learn more see scripting documentation.
         BuildNativeCode = true;
 
-        options.LinkEnv.InputFiles.Add(Path.Combine(FolderPath, "discord_game_sdk.dll.lib"));
-        options.DependencyFiles.Add(Path.Combine(FolderPath, "discord_game_sdk.dll"));
+        string discordPath = Path.Combine(FolderPath, "Third Party");
+        options.LinkEnv.InputFiles.Add(Path.Combine(discordPath, "discord_game_sdk.dll.lib"));
+        options.DependencyFiles.Add(Path.Combine(discordPath, "discord_game_sdk.dll"));
     }
 }

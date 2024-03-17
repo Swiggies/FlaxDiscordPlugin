@@ -43,3 +43,6 @@ _ReSharper*/
 
 # Ignore Nuget packages folder
 packages/
+
+
+!Source/DIscordPresence/Third Party/discord_game_sdk.dll.lib

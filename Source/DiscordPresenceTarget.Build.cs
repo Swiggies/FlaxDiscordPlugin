@@ -9,6 +9,5 @@ public class DiscordPresenceTarget : GameProjectTarget
 
         // Reference the modules for game
         Modules.Add("DiscordPresence");
-        Modules.Add("DiscordPresenceEditor");
     }
 }
